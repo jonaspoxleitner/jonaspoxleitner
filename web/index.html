@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA==" crossorigin="anonymous"></script>
+    <title>Jonas Poxleitner</title>
+    <script>
+        var x = window.innerWidth/2;
+        var y = window.innerHeight/2;
+        var min = window.innerWidth < window.innerHeight ? x : y;
+        var r = 100;
+        var arrows = [];
+    
+        function setup() {
+            x = window.innerWidth/2;
+            y = window.innerHeight/2;
+            min = window.innerWidth < window.innerHeight ? x : y;
+
+            var canvas = createCanvas(x*2, y*2);
+            canvas.parent('background');
+
+            noStroke();
+            frameRate(60);
+
+            var count = 20;
+            var spacing = TWO_PI/count;
+            for (var i = 0; i < count; i++) {
+                arrows[i] = new Arrow(min/2, spacing * i + 1, random(-20, 20));
+            }
+        }
+
+        function draw() {
+            background(255);
+            translate(x, y);
+
+            for (var i = 0; i < arrows.length; i++) {
+                arrows[i].orbit();
+                arrows[i].show();
+            }
+        }
+        
+        function windowResized() {
+            x = window.innerWidth/2;
+            y = window.innerHeight/2;
+            min = window.innerWidth < window.innerHeight ? x : y;
+
+            resizeCanvas(x*2, y*2);
+
+            for (var i = 0; i < arrows.length; i++) {
+                arrows[i].dist = min/2;
+            }
+        }
+
+        class Arrow {
+            constructor(dist, start, offset) {
+                this.radius = 10;
+                this.dist = dist;
+                this.angle = start;
+                this.offset = offset
+            }
+
+            orbit() {
+                this.angle += 0.01;
+            }
+
+            show() {
+                push();
+                fill('#222222');
+                rotate(this.angle);
+                translate(this.dist + this.offset, 0);
+                rotate(PI/2);
+                triangle(-10, -10, 0, 10, 10, -10);
+                pop();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="background"></div>
+    <div class=mail-wrapper>
+        <div class="mail">
+            <div class="button-wrapper">
+                <a class="button" href="mailto:contact@jonaspoxleitner.com">Contact me.</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
