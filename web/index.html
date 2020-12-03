@@ -7,18 +7,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA==" crossorigin="anonymous"></script>
     <title>Jonas Poxleitner</title>
     <script>
-        var x = window.innerWidth/2;
-        var y = window.innerHeight/2;
-        var min = window.innerWidth < window.innerHeight ? x : y;
-        var r = 100;
+        var distance = 125;
+        var cHeight = 500;
         var arrows = [];
     
         function setup() {
-            x = window.innerWidth/2;
-            y = window.innerHeight/2;
-            min = window.innerWidth < window.innerHeight ? x : y;
-
-            var canvas = createCanvas(x*2, y*2);
+            var canvas = createCanvas(window.innerWidth, cHeight);
             canvas.parent('background');
 
             noStroke();
@@ -27,13 +21,13 @@
             var count = 20;
             var spacing = TWO_PI/count;
             for (var i = 0; i < count; i++) {
-                arrows[i] = new Arrow(min/2, spacing * i + 1, random(-20, 20));
+                arrows[i] = new Arrow(distance, spacing * i + 1, random(-20, 20));
             }
         }
 
         function draw() {
             background(255);
-            translate(x, y);
+            translate(window.innerWidth/2, cHeight/2);
 
             for (var i = 0; i < arrows.length; i++) {
                 arrows[i].orbit();
@@ -42,15 +36,7 @@
         }
         
         function windowResized() {
-            x = window.innerWidth/2;
-            y = window.innerHeight/2;
-            min = window.innerWidth < window.innerHeight ? x : y;
-
-            resizeCanvas(x*2, y*2);
-
-            for (var i = 0; i < arrows.length; i++) {
-                arrows[i].dist = min/2;
-            }
+            resizeCanvas(window.innerWidth, cHeight);
         }
 
         class Arrow {
@@ -78,13 +64,20 @@
     </script>
 </head>
 <body>
-    <div id="background"></div>
-    <div class=mail-wrapper>
-        <div class="mail">
+    <section class="info">
+        <div class="text">
+            <h1>Hi, I'm Jonas!</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis in repellat nam quisquam, ipsa sunt veniam praesentium, voluptate animi ullam accusamus omnis quibusdam nisi quidem tempora, iure dolores eaque! Consequatur.</p>
+        </div>
+    </section>
+    <section class="landing">
+        <div id="background"></div>
+        <div class="mail-wrapper">
             <div class="button-wrapper">
                 <a class="button" href="mailto:contact@jonaspoxleitner.com">Contact me.</a>
             </div>
         </div>
-    </div>
+    </section>
+    
 </body>
 </html>
