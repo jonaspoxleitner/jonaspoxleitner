@@ -1,0 +1,26 @@
+{
+    "name": "Jonas Poxleitner",
+    "short_name": "JP",
+    "icons": [
+        {
+            "src": "icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "./?utm_source=web_app_manifest",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "theme_color": "#222222",
+    "orientation": "portrait"
+}
