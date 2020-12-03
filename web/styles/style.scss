@@ -9,6 +9,18 @@ body {
     font-family: 'Source Code Pro', monospace;
 }
 
+.info {
+    padding: 1rem;
+    max-width: 700px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    .text {
+        width: 100%;
+    }
+}
+
 .landing {
     position: relative;
     height: 500px;
@@ -34,15 +46,17 @@ body {
     }
 }
 
-.info {
-    padding: 1rem;
-    max-width: 700px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.social {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
-    .text {
-        width: 100%;
+    .button-wrapper {
+        margin: 1rem;
     }
 }
 
@@ -53,17 +67,17 @@ body {
     background-color: #222;
     padding: 5px;
     border-radius: 10px;
-}
 
-.button {
-    color: white;
-    padding: 1rem;
-    border-radius: 6px;
-    text-decoration: none;
-
-    &:hover {
-        color: black;
-        background-color: white;
-        border-radius: 5px;
+    .button {
+        color: white;
+        padding: 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+    
+        &:hover {
+            color: black;
+            background-color: white;
+            border-radius: 5px;
+        }
     }
 }
