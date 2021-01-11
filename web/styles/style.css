@@ -11,6 +11,22 @@ body {
   font-family: 'Source Code Pro', monospace;
 }
 
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+a:active {
+  color: black;
+}
+
 .info {
   padding: 1rem;
   max-width: 700px;
@@ -99,5 +115,36 @@ body {
   color: black;
   background-color: white;
   border-radius: 5px;
+}
+
+.horizontal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.icon {
+  width: 2.0rem;
+  height: 2.0rem;
+  padding-right: 1rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.3rem;
 }
 /*# sourceMappingURL=style.css.map */

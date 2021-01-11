@@ -9,6 +9,22 @@ body {
     font-family: 'Source Code Pro', monospace;
 }
 
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: black;
+}
+
+a:active {
+    color: black;
+}
+
 .info {
     padding: 1rem;
     max-width: 700px;
@@ -80,4 +96,28 @@ body {
             border-radius: 5px;
         }
     }
+}
+
+.horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon {
+    width: 2.0rem;
+    height: 2.0rem;
+    padding-right: 1rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.3rem;
 }
