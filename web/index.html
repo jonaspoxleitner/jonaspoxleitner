@@ -14,9 +14,11 @@
         var distance = 125;
         var cHeight = 500;
         var arrows = [];
+        var box;
     
         function setup() {
-            var canvas = createCanvas(window.innerWidth, cHeight);
+            box = document.getElementById('background');
+            var canvas = createCanvas(box.clientWidth, cHeight);
             canvas.parent('background');
 
             noStroke();
@@ -31,7 +33,7 @@
 
         function draw() {
             background(255);
-            translate(window.innerWidth/2, cHeight/2);
+            translate(box.clientWidth/2, cHeight/2);
 
             for (var i = 0; i < arrows.length; i++) {
                 arrows[i].orbit();
@@ -40,7 +42,7 @@
         }
         
         function windowResized() {
-            resizeCanvas(window.innerWidth, cHeight);
+            resizeCanvas(box.clientWidth, cHeight);
         }
 
         class Arrow {
