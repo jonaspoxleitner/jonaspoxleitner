@@ -32,12 +32,17 @@
         }
 
         function draw() {
-            background(255);
+            var isDarkMode = document.documentElement.classList.contains('dark-mode');
+            if (isDarkMode) {
+                background(34, 34, 34);
+            } else {
+                background(255, 255, 255);
+            }
             translate(box.clientWidth/2, cHeight/2);
 
             for (var i = 0; i < arrows.length; i++) {
                 arrows[i].orbit();
-                arrows[i].show();
+                arrows[i].show(isDarkMode);
             }
         }
         
@@ -57,9 +62,13 @@
                 this.angle += 0.01;
             }
 
-            show() {
+            show(isDarkMode) {
                 push();
-                fill('#222222');
+                if (isDarkMode) {
+                    fill('#ffffff');
+                } else {
+                    fill('#222222');
+                }
                 rotate(this.angle);
                 translate(this.dist + this.offset, 0);
                 rotate(PI/2);
@@ -70,6 +79,26 @@
     </script>
 </head>
 <body>
+    <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+        <span class="icon-sun">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="4" stroke="#222222" stroke-width="1.5"/>
+                <line x1="10" y1="2" x2="10" y2="0" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="10" y1="20" x2="10" y2="18" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="2" y1="10" x2="0" y2="10" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="20" y1="10" x2="18" y2="10" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="4.343" y1="4.343" x2="3.536" y2="3.536" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="16.464" y1="16.464" x2="15.657" y2="15.657" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="15.657" y1="4.343" x2="16.464" y2="3.536" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="3.536" y1="16.464" x2="4.343" y2="15.657" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        </span>
+        <span class="icon-moon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="6" fill="#ffffff"/>
+            </svg>
+        </span>
+    </button>
     <section class="info">
         <div class="text">
             <h1>Hi, I'm Jonas!</h1>
@@ -130,5 +159,61 @@
             <p>On all my apps, you are not being tracked beyond the optional Developer Tools from Apple and Google, which you can opt in and out yourself. Your data is processed and stored locally.</p>
         </div>
     </section>
+    <script>
+        (function() {
+            const toggle = document.getElementById('dark-mode-toggle');
+            const html = document.documentElement;
+            
+            function getSystemPreference() {
+                return window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+            
+            function getStoredPreference() {
+                const stored = localStorage.getItem('darkMode');
+                return stored === null ? null : stored === 'true';
+            }
+            
+            function setDarkMode(isDark) {
+                if (isDark) {
+                    html.classList.add('dark-mode');
+                } else {
+                    html.classList.remove('dark-mode');
+                }
+                localStorage.setItem('darkMode', isDark);
+                updateToggleIcon(isDark);
+            }
+            
+            function updateToggleIcon(isDark) {
+                const sun = toggle.querySelector('.icon-sun');
+                const moon = toggle.querySelector('.icon-moon');
+                if (isDark) {
+                    sun.style.display = 'none';
+                    moon.style.display = 'inline';
+                } else {
+                    sun.style.display = 'inline';
+                    moon.style.display = 'none';
+                }
+            }
+            
+            function initDarkMode() {
+                const stored = getStoredPreference();
+                const isDark = stored !== null ? stored : getSystemPreference();
+                setDarkMode(isDark);
+            }
+            
+            toggle.addEventListener('click', function() {
+                const isDark = html.classList.contains('dark-mode');
+                setDarkMode(!isDark);
+            });
+            
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (getStoredPreference() === null) {
+                    setDarkMode(e.matches);
+                }
+            });
+            
+            initDarkMode();
+        })();
+    </script>
 </body>
 </html>
