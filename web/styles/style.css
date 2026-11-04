@@ -35,11 +35,9 @@
 /* Theme ------------------------------------------------------------------- */
 
 :root {
-    --palette-50: #f6f4ff;
-    --palette-200: #d6c4f8;
-    --palette-500: #7c69ee;
-    --palette-700: #5236c9;
-    --palette-900: #241a52;
+    /* The header bar's base colour: white, so nothing flashes while
+     * banner.png loads or if it fails. */
+    --header-base: #ffffff;
 
     /* Text is either pure black on the white page or pure white in the bar. */
     --color-text: #000000;
@@ -127,7 +125,7 @@ p:last-child {
 
 a:focus-visible,
 button:focus-visible {
-    outline: 2px solid var(--palette-700);
+    outline: 2px solid var(--color-text);
     outline-offset: 2px;
     border-radius: 0.25rem;
 }
@@ -152,7 +150,7 @@ button:focus-visible {
      * edge land exactly on the text column at every viewport width. */
     padding: 0 max(var(--content-gutter), calc((100% - var(--content-width)) / 2 + var(--content-gutter)));
     color: #ffffff;
-    background-color: var(--palette-700);
+    background-color: var(--header-base);
     background-image: url("../assets/images/banner.png");
     background-position: center;
     background-size: cover;
@@ -189,7 +187,7 @@ button:focus-visible {
     background-color: rgba(255, 255, 255, 0.16);
 }
 
-/* The bar is purple, so the global purple focus ring would disappear in it. */
+/* The dark bar would swallow the global black focus ring. */
 .site-header a:focus-visible {
     outline-color: #ffffff;
 }
