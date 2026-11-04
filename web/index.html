@@ -5,255 +5,130 @@
     <meta name="keywords" content="Jonas, Poxleitner, develop, flutter, open source">
     <meta name="description" content="Jonas is developing open-source software.">
     <meta name="author" content="Jonas Poxleitner">
-    <link rel="icon" type="image/png" sizes="64x64" href="logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="styles/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA==" crossorigin="anonymous"></script>
     <title>Jonas Poxleitner</title>
-    <script>
-        var distance = 125;
-        var cHeight = 500;
-        var arrows = [];
-        var box;
-    
-        function setup() {
-            box = document.getElementById('background');
-            var canvas = createCanvas(box.clientWidth, cHeight);
-            canvas.parent('background');
-
-            noStroke();
-            frameRate(60);
-
-            var count = 20;
-            var spacing = TWO_PI/count;
-            for (var i = 0; i < count; i++) {
-                arrows[i] = new Arrow(distance, spacing * i + 1, random(-20, 20));
-            }
-        }
-
-        function draw() {
-            var isDarkMode = document.documentElement.classList.contains('dark-mode');
-            if (isDarkMode) {
-                background(34, 34, 34);
-            } else {
-                background(255, 255, 255);
-            }
-            translate(box.clientWidth/2, cHeight/2);
-
-            for (var i = 0; i < arrows.length; i++) {
-                arrows[i].orbit();
-                arrows[i].show(isDarkMode);
-            }
-        }
-        
-        function windowResized() {
-            resizeCanvas(box.clientWidth, cHeight);
-        }
-
-        class Arrow {
-            constructor(dist, start, offset) {
-                this.radius = 10;
-                this.dist = dist;
-                this.angle = start;
-                this.offset = offset
-            }
-
-            orbit() {
-                this.angle += 0.01;
-            }
-
-            show(isDarkMode) {
-                push();
-                if (isDarkMode) {
-                    fill('#ffffff');
-                } else {
-                    fill('#222222');
-                }
-                rotate(this.angle);
-                translate(this.dist + this.offset, 0);
-                rotate(PI/2);
-                triangle(-10, -10, 0, 10, 10, -10);
-                pop();
-            }
-        }
-    </script>
 </head>
 <body>
-    <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-        <span class="icon-sun">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="10" cy="10" r="4" stroke="#222222" stroke-width="1.5"/>
-                <line x1="10" y1="2" x2="10" y2="0" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="10" y1="20" x2="10" y2="18" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="2" y1="10" x2="0" y2="10" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="20" y1="10" x2="18" y2="10" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="4.343" y1="4.343" x2="3.536" y2="3.536" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="16.464" y1="16.464" x2="15.657" y2="15.657" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="15.657" y1="4.343" x2="16.464" y2="3.536" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="3.536" y1="16.464" x2="4.343" y2="15.657" stroke="#222222" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-        </span>
-        <span class="icon-moon">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="10" cy="10" r="6" fill="#ffffff"/>
-            </svg>
-        </span>
-    </button>
-    <section class="info">
-        <div class="text">
-            <h1>Hi, I'm Jonas!</h1>
-            <p>Welcome to my cozy site. Here, you can see some information about my current projects and links to my social media. Furthermore, you can reach out to me on LinkedIn.</p>
-        </div>
-    </section>
-    <section class="info">
-        <div class="text">
-            <div class="horizontal">
-                <img class="icon" src="icons/minimalistic_push.png">
-                <h2>Minimalistic Push</h2>
-            </div>
-            <p>This Flutter app for iOS and Android let's you track your push-up sessions. Noticeaby, the background changes based on the user's latest performance and also improves readability for the settings and the session overview. You are also able to change the theme to your liking.</p>
-            <p>You have a feature request? Simply open a new issue on GitHub with the 'Feature' tag.</p>
-            <p>You have a theme idea? Just pick the extra on my buymeacoffee page. Don't worry, it's free!</p>
-            <div class="social">
-                <div class="button-wrapper">
-                    <a class="button" href="https://apps.apple.com/de/app/minimalistic-push/id1528998913" target="_blank">App Store (iOS)</a>
+    <header class="site-header">
+        <a class="site-brand" href="#top">
+            <img class="site-logo" src="assets/images/logo_color_transparent.png" alt="Jonas Poxleitner" width="503" height="281">
+        </a>
+        <nav class="site-nav" aria-label="Page sections">
+            <a href="#projects">Projects</a>
+            <a href="#links">Links</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <main id="top">
+        <section class="info" id="intro">
+            <h1 class="intro-heading">Hi, I'm a full stack software developer!</h1>
+        </section>
+        <section class="projects" id="projects" aria-labelledby="projects-title">
+            <h2 id="projects-title">Projects</h2>
+            <article class="info project entry">
+                <div class="entry-icon">
+                    <img class="icon" src="assets/icons/minimalistic_push.png" alt="" width="32" height="32">
+                </div>
+                <div class="entry-body">
+                    <h3 class="entry-name">Minimalistic Push</h3>
+                    <div class="entry-description">
+                        <p>This Flutter app for iOS and Android lets you track your push-up sessions. Notably, the background changes based on the user's latest performance and also improves readability for the settings and the session overview. You are also able to change the theme to your liking.</p>
+                        <p>You have a feature request? Simply open a new issue on GitHub with the 'Feature' tag.</p>
+                        <p>You have a theme idea? Just pick the extra on my buymeacoffee page. Don't worry, it's free!</p>
+                    </div>
+                    <div class="social">
+                        <a class="button" href="https://apps.apple.com/de/app/minimalistic-push/id1528998913" target="_blank" rel="noopener">App Store (iOS)</a>
+                    </div>
+                </div>
+            </article>
+            <article class="info project entry">
+                <div class="entry-icon">
+                    <img class="icon" src="assets/icons/peekbar.png" alt="" width="32" height="32">
+                </div>
+                <div class="entry-body">
+                    <h3 class="entry-name">PEEKBAR</h3>
+                    <div class="entry-description">
+                        <p>This is the organization, where Daniel and I develop free and open-source software for businesses. Currently, there is a project planned, where restaurants can generate their digital menus for their website. You can check out the projects in the <a href="https://github.com/orgs/peekbar">GitHub</a> repository.</p>
+                    </div>
+                </div>
+            </article>
+            <article class="info project entry">
+                <div class="entry-icon">
+                    <img class="icon" src="assets/icons/rowing.png" alt="" width="32" height="32">
+                </div>
+                <div class="entry-body">
+                    <h3 class="entry-name">Rowing Workouts</h3>
+                    <div class="entry-description">
+                        <p>You like rowing? Then this one's for you. Just pick one of the bundled workouts like Steady State, Pyramid or Sprint Intervals, and the app walks you through each interval while keeping you on the right stroke rate. No signup, no fuss!</p>
+                    </div>
+                    <div class="social">
+                        <a class="button" href="https://rowing.vlkn.io" target="_blank" rel="noopener">rowing.vlkn.io</a>
+                    </div>
+                </div>
+            </article>
+            <article class="info project entry">
+                <div class="entry-icon">
+                    <img class="icon" src="assets/icons/photo_collector.png" alt="" width="32" height="32">
+                </div>
+                <div class="entry-body">
+                    <h3 class="entry-name">Photo Collector</h3>
+                    <div class="entry-description">
+                        <p>Getting married or throwing a party? Photo Collector is a fully static, self-hosted app that lets your guests share their photos and videos with you. Guests scan a QR code, open a web page — no login, no app install — and upload directly to S3-compatible object storage. There is no backend and no database.</p>
+                        <p>The QR code embeds write-only credentials, so guests can only upload, never read or delete. A companion CLI generates print-ready QR cards with a heart-shaped design for your tables.</p>
+                    </div>
+                    <div class="social">
+                        <a class="button" href="https://photo-collector.vlkn.io" target="_blank" rel="noopener">photo-collector.vlkn.io</a>
+                    </div>
+                </div>
+            </article>
+            <article class="info project entry">
+                <div class="entry-icon">
+                    <img class="icon" src="assets/icons/cartographer.png" alt="" width="32" height="32">
+                </div>
+                <div class="entry-body">
+                    <h3 class="entry-name">Cartographer</h3>
+                    <div class="entry-description">
+                        <p>Cartographer loads GPX routes and merges them into a single route graph, with pathfinding between routes as the end goal. It is a Java 21 project built with Maven, and it can also export the merged graph as an SVG map.</p>
+                    </div>
+                    <div class="social">
+                        <a class="button" href="https://github.com/jonaspoxleitner/cartographer" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <section class="info" id="links">
+            <h2>Important links:</h2>
+            <div class="entry entry--plain">
+                <div class="entry-body">
+                    <div class="social">
+                        <a class="button" href="https://github.com/jonaspoxleitner" target="_blank" rel="noopener">GitHub</a>
+                        <a class="button" href="https://www.buymeacoffee.com/jonaspoxleitner" target="_blank" rel="noopener">Buy me a coffee</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="info">
-        <div class="text">
-            <div class="horizontal">
-                <img class="icon" src="icons/peekbar.png">
-                <h2>PEEKBAR</h2>
-            </div>
-            <p>This is the organization, where Daniel and I develop free and open-source software for businesses. Currently, there is a project planned, where restaurants can generate their digital menus for their website. You can check out the projects in the <a href="https://github.com/orgs/peekbar">GitHub</a> repository.</p>
-        </div>
-    </section>
-    <section class="info">
-        <div class="text">
-            <div class="horizontal">
-                <img class="icon" src="icons/rowing.png">
-                <h2>Rowing Workouts</h2>
-            </div>
-            <p>You like rowing? Then this one's for you. Just pick one of the bundled workouts like Steady State, Pyramid or Sprint Intervals, and the app walks you through each interval while keeping you on the right stroke rate. No signup, no fuss!</p>
-            <div class="social">
-                <div class="button-wrapper">
-                    <a class="button" href="https://rowing.vlkn.io" target="_blank">rowing.vlkn.io</a>
+        </section>
+        <section class="info" id="contact">
+            <h2>Contact</h2>
+            <div class="entry entry--plain">
+                <div class="entry-body">
+                    <div class="social">
+                        <a class="button" href="https://de.linkedin.com/in/jonas-poxleitner-07798320a" target="_blank" rel="noopener">Reach out</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="info">
-        <div class="text">
-            <div class="horizontal">
-                <img class="icon" src="icons/photo_collector.png">
-                <h2>Photo Collector</h2>
-            </div>
-            <p>Getting married or throwing a party? Photo Collector is a fully static, self-hosted app that lets your guests share their photos and videos with you. Guests scan a QR code, open a web page — no login, no app install — and upload directly to S3-compatible object storage. There is no backend and no database.</p>
-            <p>The QR code embeds write-only credentials, so guests can only upload, never read or delete. A companion CLI generates print-ready QR cards with a heart-shaped design for your tables.</p>
-            <div class="social">
-                <div class="button-wrapper">
-                    <a class="button" href="https://photo-collector.vlkn.io" target="_blank">photo-collector.vlkn.io</a>
+        </section>
+        <section class="info" id="privacy">
+            <h2>Privacy Policy for my Apps and Sites:</h2>
+            <div class="entry entry--plain">
+                <div class="entry-body">
+                    <div class="entry-description">
+                        <p>On all my apps, you are not being tracked beyond the optional Developer Tools from Apple and Google, which you can opt in and out yourself. Your data is processed and stored locally.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="info">
-        <div class="text">
-            <div class="horizontal">
-                <img class="icon" src="icons/cartographer.png">
-                <h2>Cartographer</h2>
-            </div>
-            <p>Cartographer loads GPX routes and merges them into a single route graph, with pathfinding between routes as the end goal. It is a Java 21 project built with Maven, and it can also export the merged graph as an SVG map.</p>
-            <div class="social">
-                <div class="button-wrapper">
-                    <a class="button" href="https://github.com/jonaspoxleitner/cartographer" target="_blank">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="landing">
-        <div id="background"></div>
-        <div class="mail-wrapper">
-            <div class="button-wrapper">
-                <a class="button" href="https://de.linkedin.com/in/jonas-poxleitner-07798320a" target="_blank">Reach out</a>
-            </div>
-        </div>
-    </section>
-    <section class="info">
-        <h3>Important links:</h3>
-        <div class="social">
-            <div class="button-wrapper">
-                <a class="button" href="https://github.com/jonaspoxleitner">GitHub</a>
-            </div>
-            <div class="button-wrapper">
-                <a class="button" href="https://www.buymeacoffee.com/jonaspoxleitner">Buy me a coffee</a>
-            </div>
-        </div>
-        
-    </section>
-    <section class="info">
-        <div class="text">
-            <h3>Privacy Policy for my Apps and Sites:</h3>
-            <p>On all my apps, you are not being tracked beyond the optional Developer Tools from Apple and Google, which you can opt in and out yourself. Your data is processed and stored locally.</p>
-        </div>
-    </section>
-    <script>
-        (function() {
-            const toggle = document.getElementById('dark-mode-toggle');
-            const html = document.documentElement;
-            
-            function getSystemPreference() {
-                return window.matchMedia('(prefers-color-scheme: dark)').matches;
-            }
-            
-            function getStoredPreference() {
-                const stored = localStorage.getItem('darkMode');
-                return stored === null ? null : stored === 'true';
-            }
-            
-            function setDarkMode(isDark) {
-                if (isDark) {
-                    html.classList.add('dark-mode');
-                } else {
-                    html.classList.remove('dark-mode');
-                }
-                localStorage.setItem('darkMode', isDark);
-                updateToggleIcon(isDark);
-            }
-            
-            function updateToggleIcon(isDark) {
-                const sun = toggle.querySelector('.icon-sun');
-                const moon = toggle.querySelector('.icon-moon');
-                if (isDark) {
-                    sun.style.display = 'none';
-                    moon.style.display = 'inline';
-                } else {
-                    sun.style.display = 'inline';
-                    moon.style.display = 'none';
-                }
-            }
-            
-            function initDarkMode() {
-                const stored = getStoredPreference();
-                const isDark = stored !== null ? stored : getSystemPreference();
-                setDarkMode(isDark);
-            }
-            
-            toggle.addEventListener('click', function() {
-                const isDark = html.classList.contains('dark-mode');
-                setDarkMode(!isDark);
-            });
-            
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-                if (getStoredPreference() === null) {
-                    setDarkMode(e.matches);
-                }
-            });
-            
-            initDarkMode();
-        })();
-    </script>
+        </section>
+    </main>
 </body>
 </html>

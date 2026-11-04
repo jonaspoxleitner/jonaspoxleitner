@@ -1,225 +1,377 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap");
+/* Self-hosted typefaces ---------------------------------------------------- */
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../assets/fonts/Roboto-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../assets/fonts/Roboto-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../assets/fonts/Roboto-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("../assets/fonts/JetBrainsMono%5Bwght%5D.ttf") format("truetype");
+    font-weight: 100 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Theme ------------------------------------------------------------------- */
+
+:root {
+    --palette-50: #f6f4ff;
+    --palette-200: #d6c4f8;
+    --palette-500: #7c69ee;
+    --palette-700: #5236c9;
+    --palette-900: #241a52;
+
+    /* Text is either pure black on the white page or pure white in the bar. */
+    --color-text: #000000;
+    --color-page: #ffffff;
+
+    --font-body: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --content-width: 45rem;
+    /* Inner left/right padding of the text column. The bar derives its own
+     * padding from this, so the two edges always coincide. */
+    --content-gutter: 1rem;
+    --header-height: 4rem;
+}
+
+/* Base -------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  overflow-x: hidden;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  font-family: "Source Code Pro", monospace;
-  -webkit-text-size-adjust: none;
-  background-color: #ffffff;
-  color: #222222;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    background-color: var(--color-page);
+    color: var(--color-text);
+    -webkit-text-size-adjust: 100%;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+}
+
+/* CV-style section headings: small, bold, mono, left-aligned. */
+h2 {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    margin-bottom: 1.25rem;
+}
+
+/* The intro is the one display element on the page: a full sentence in the
+ * mono face, big enough to sit above everything else in the hierarchy. */
+.intro-heading {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0;
+    margin-bottom: 0;
+}
+
+/* Entry names sit one weight below the headings, in the same mono face. */
+h3 {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0.01em;
 }
 
 p {
-  font-size: 0.8125rem;
-  margin-bottom: 0.3125rem;
-  color: #222222;
+    margin: 0 0 0.75rem;
 }
 
-.info:first-of-type .text p:first-of-type {
-  font-size: 1.3125rem;
+p:last-child {
+    margin-bottom: 0;
 }
 
-h1 {
-  font-size: 3.4375rem;
-  margin-bottom: 0.5rem;
-  color: #222222;
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--palette-700);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
 }
 
-h2 {
-  font-size: 2.125rem;
-  margin: 0 0 0.5rem 0;
-  line-height: 1.2;
-  color: #222222;
+/* Banner bar -------------------------------------------------------------- */
+
+/* Slim sticky bar painted with the banner image exactly as it is: no scrim,
+ * filter, gradient or blend layer sits between the image and the bar
+ * content. */
+.site-header {
+    position: sticky;
+    user-select: none;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.375rem;
+    min-height: var(--header-height);
+    /* Same rule the sections use to centre their 45rem column, plus the
+     * column's own inner padding: the logo's left edge and the nav's right
+     * edge land exactly on the text column at every viewport width. */
+    padding: 0 max(var(--content-gutter), calc((100% - var(--content-width)) / 2 + var(--content-gutter)));
+    color: #ffffff;
+    background-color: var(--palette-700);
+    background-image: url("../assets/images/banner.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-h3 {
-  font-size: 1.3125rem;
-  margin-bottom: 0.5rem;
-  color: #222222;
+/* The transparent monogram is the whole brand, so it carries the link back
+ * to the top of the page on its own. */
+.site-brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 
-.info > h3 {
-  margin-bottom: 0.8125rem;
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.01em;
 }
 
-a:link,
-a:visited,
-a:hover,
-a:active {
-  color: #222222;
+.site-nav a {
+    padding: 0.3125rem 0.375rem;
+    border-radius: 0.375rem;
+    color: #ffffff;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s ease;
 }
 
-.info {
-  padding: 0.8125rem;
-  max-width: 700px;
-  display: block;
-  margin: 0 auto 1.3125rem;
+.site-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.16);
 }
 
-.info .text {
-  width: 100%;
+/* The bar is purple, so the global purple focus ring would disappear in it. */
+.site-header a:focus-visible {
+    outline-color: #ffffff;
 }
 
-.landing {
-  position: relative;
-  height: 500px;
-  width: 100%;
-}
-.landing #background {
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-.landing .mail-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
+/* The monogram is trimmed to its visual bounds, so the box can be sized
+ * directly in the bar and still lands flush on the content column's left
+ * edge with no inset. */
+.site-logo {
+    display: block;
+    width: auto;
+    height: 1.25rem;
 }
 
-.social {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.5rem;
+/* Sections --------------------------------------------------------------- */
+
+/* The bar is the only full-bleed element; content starts right below it. */
+main {
+    padding: 2rem 0 4rem;
+    scroll-margin-top: var(--header-height);
 }
 
-.text > .social {
-  margin-top: 0.8125rem;
+/* Flat flow: sections are plain blocks separated by whitespace, no cards.
+ * Section gaps stay wider than entry gaps, since the small mono headings
+ * carry far less hierarchy than the old display sizes. */
+main > section + section {
+    margin-top: 3rem;
 }
 
-.button-wrapper {
-  display: grid;
-  position: relative;
-  background-color: #222222;
-  padding: 0.3125rem;
-  border-radius: 0.625rem;
-}
-.button-wrapper .button {
-  color: #ffffff;
-  padding: 0.8125rem;
-  border-radius: 0.375rem;
-  text-decoration: none;
-  font-size: 0.8125rem;
-  text-align: center;
-}
-.button-wrapper .button:hover {
-  color: #222222;
-  background-color: #ffffff;
-  border-radius: 0.3125rem;
+.info,
+.projects {
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--content-gutter);
+    scroll-margin-top: calc(var(--header-height) + 1rem);
 }
 
-.text > .social .button-wrapper:only-child {
-  flex: 1;
-  width: 100%;
+/* Inline links carry no colour at all: on a black-text page the underline is
+ * the only affordance they need. */
+.info p a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-thickness: 0.06em;
+    text-underline-offset: 0.18em;
 }
 
-.horizontal {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  margin-bottom: 0.5rem;
-  gap: 0.5rem;
+.project {
+    max-width: none;
+    margin: 0;
+    padding: 0;
 }
-.horizontal h2 {
-  margin: 0 0 0.5rem 0;
+
+.project + .project {
+    margin-top: 2.25rem;
+}
+
+/* CV entry: a narrow icon column on the left, all text indented beside it. */
+.entry {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    column-gap: 0.875rem;
+    align-items: start;
+}
+
+/* Height matches the entry name's line box, so the larger icon is centred on
+ * that first line without pushing the description down. Flex, not grid: a
+ * grid row would grow to the icon and drop the icon off the name line. */
+.entry-icon {
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
+}
+
+/* Links, contact and privacy have no icon; their text still starts in the
+ * content column so every section shares one left edge. */
+.entry--plain > .entry-body {
+    grid-column: 2;
+}
+
+.entry-body {
+    min-width: 0;
+}
+
+.entry-name {
+    margin-bottom: 0.5rem;
+}
+
+.entry-description p {
+    font-size: 0.875rem;
+    line-height: 1.5;
 }
 
 .icon {
-  width: 1.3125rem;
-  height: 1.3125rem;
-  flex-shrink: 0;
-  -o-object-fit: contain;
-     object-fit: contain;
-  display: block;
-  margin-top: 0.25rem;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
 }
 
-ul {
-  margin: 0.5rem 0;
-  padding-left: 0.8125rem;
+/* Buttons ---------------------------------------------------------------- */
+
+/* The row is nudged left by the button padding so the first label lines up
+ * with the entry text, while the hover wash keeps breathing room around it. */
+.social {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.125rem;
+    margin-inline: -0.625rem;
 }
 
-li {
-  margin-bottom: 0.3125rem;
-  font-size: 0.8125rem;
-  color: #222222;
+.social:not(:first-child) {
+    margin-top: 1rem;
 }
 
-.dark-mode-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 1000;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  line-height: 1;
-}
-.dark-mode-toggle .icon-sun,
-.dark-mode-toggle .icon-moon {
-  display: inline-block;
-}
-.dark-mode-toggle .icon-sun svg,
-.dark-mode-toggle .icon-moon svg {
-  display: block;
-  width: 20px;
-  height: 20px;
+/* Action buttons mirror the header nav links: mono text, no fill, and the
+ * same translucent hover wash. The page below the bar is white, so the wash
+ * is black-tinted instead of white. */
+.button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4375rem 0.625rem;
+    border-radius: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--color-text);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s ease;
 }
 
-html.dark-mode {
-  background-color: #222222;
+.button:hover {
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
-html.dark-mode body {
-  background-color: #222222 !important;
-  color: #ffffff;
+/* Responsive ------------------------------------------------------------- */
+
+@media (min-width: 48rem) {
+    :root {
+        --header-height: 4.5rem;
+    }
+
+    .site-header {
+        gap: 1rem;
+    }
+
+    .site-nav {
+        gap: 0.25rem;
+        font-size: 0.8125rem;
+    }
+
+    .site-nav a {
+        padding: 0.4375rem 0.625rem;
+        border-radius: 0.5rem;
+    }
+
+    .site-logo {
+        height: 1.5rem;
+    }
+
+    main > section + section {
+        margin-top: 3.5rem;
+    }
+
+    .project + .project {
+        margin-top: 3rem;
+    }
 }
 
-html.dark-mode p,
-html.dark-mode h1,
-html.dark-mode h2,
-html.dark-mode h3,
-html.dark-mode li {
-  color: #ffffff;
-}
+/* Motion preferences ----------------------------------------------------- */
 
-html.dark-mode a:link,
-html.dark-mode a:visited,
-html.dark-mode a:hover,
-html.dark-mode a:active {
-  color: #ffffff;
-}
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 
-html.dark-mode .button-wrapper {
-  background-color: #ffffff;
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
-
-html.dark-mode .button-wrapper .button {
-  color: #222222;
-}
-
-html.dark-mode .button-wrapper .button:hover {
-  color: #ffffff;
-  background-color: #222222;
-}
-
-html.dark-mode .icon-sun svg {
-  stroke: #ffffff;
-}
-
-html.dark-mode .icon-moon svg {
-  fill: #ffffff;
-}/*# sourceMappingURL=style.css.map */
