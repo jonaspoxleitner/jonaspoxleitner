@@ -200,7 +200,7 @@ button:focus-visible {
 .site-logo {
     display: block;
     width: auto;
-    height: 1.25rem;
+    height: 1.125rem;
 }
 
 /* Sections --------------------------------------------------------------- */
@@ -326,6 +326,12 @@ main > section + section {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
+/* The scroll-linked shimmer is ambient, not user intent, so it wears a
+ * lighter wash than a real hover. */
+.button--lit {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
 /* Responsive ------------------------------------------------------------- */
 
 @media (min-width: 48rem) {
@@ -348,7 +354,7 @@ main > section + section {
     }
 
     .site-logo {
-        height: 1.5rem;
+        height: 1.375rem;
     }
 
     main > section + section {
