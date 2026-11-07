@@ -93,7 +93,7 @@
                 <div class="entry-body">
                     <h3 class="entry-name">Cartographer</h3>
                     <div class="entry-description">
-                        <p>Cartographer loads GPX routes and merges them into a single route graph, with pathfinding between routes as the end goal. It is a Java 21 project built with Maven, and it can also export the merged graph as an SVG map.</p>
+                        <p>Cartographer merges GPX hiking routes into a single route graph, detecting intersections and retraced (shared) sections along the way. It is a Java 21 project built with Maven: a CLI renders the graph as an SVG map, and a Spring Boot server serves it as an interactive web map from pre-rendered vector tiles, alongside a GeoJSON API. Pathfinding across the merged routes is the end goal.</p>
                     </div>
                     <div class="social">
                         <a class="button" href="https://github.com/jonaspoxleitner/cartographer" target="_blank" rel="noopener">GitHub</a>
