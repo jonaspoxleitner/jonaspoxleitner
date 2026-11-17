@@ -1,0 +1,18 @@
+{
+  "specVersion": "1.0",
+  "entries": [
+    {
+      "identifier": "urn:air:vlkn.io:site:jonas-poxleitner",
+      "displayName": "Jonas Poxleitner",
+      "type": "text/html",
+      "url": "https://vlkn.io/",
+      "description": "Personal site of Jonas Poxleitner, a full-stack software developer building open-source software: Flutter apps for iOS and Android, static web tools and Java services.",
+      "tags": ["software developer", "open source", "flutter", "java", "portfolio"],
+      "representativeQueries": [
+        "Who is Jonas Poxleitner?",
+        "Which open-source projects does Jonas Poxleitner maintain?",
+        "How can I contact Jonas Poxleitner?"
+      ]
+    }
+  ]
+}

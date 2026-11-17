@@ -1,0 +1,19 @@
+# Jonas Poxleitner
+
+> Personal site of Jonas Poxleitner, a full-stack software developer building open-source software.
+
+Jonas builds Flutter apps for iOS and Android, static web tools and Java services. This site lists the projects, links and contact details.
+
+## Projects
+
+- [Minimalistic Push](https://apps.apple.com/de/app/minimalistic-push/id1528998913): Flutter app that tracks push-up sessions, with a background that follows the latest performance.
+- [PEEKBAR](https://github.com/orgs/peekbar): Organization where free and open-source software for businesses is developed.
+- [Rowing Workouts](https://rowing.vlkn.io): Flutter app that walks through bundled rowing interval workouts while keeping the stroke rate.
+- [Photo Collector](https://photo-collector.vlkn.io): Fully static, self-hosted app that lets event guests upload photos and videos straight to S3-compatible storage.
+- [Cartographer](https://github.com/jonaspoxleitner/cartographer): Java 21 tool that merges GPX hiking routes into a route graph, rendering SVG maps and serving an interactive web map with pathfinding.
+
+## Elsewhere
+
+- [GitHub](https://github.com/jonaspoxleitner)
+- [LinkedIn](https://de.linkedin.com/in/jonas-poxleitner-07798320a)
+- [Buy me a coffee](https://www.buymeacoffee.com/jonaspoxleitner)

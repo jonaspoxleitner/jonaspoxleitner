@@ -4,6 +4,7 @@
 #
 #   fonts   variable TTFs -> Latin-subset WOFF2
 #   images  banner.png    -> banner.webp
+#   images  logo.png      -> social-card.jpg (1200x630 link preview)
 #   icons   <app>.png     -> <app>.webp at 128px (drawn at 32px, so 4x headroom)
 #
 # Needs fonttools (pip install fonttools), cwebp (brew install webp), npx, and
@@ -40,6 +41,35 @@ subset_woff2 "$TMP/jetbrains.ttf" web/assets/fonts/JetBrainsMono-Variable.woff2
 
 # Banner: a 1584x396 gradient behind a 64-72px bar, so q84 keeps the grain.
 cwebp -quiet -q 84 -m 6 -mt sources/images/banner.png -o web/assets/images/banner.webp
+
+# Share card: the banner cover-cropped to the 1200x630 that link previews expect (they only take JPG/PNG, so the WebP in the bar is out), with the monogram in white centred on top.
+python3 - <<'PY'
+import os
+
+from PIL import Image
+
+W, H = 1200, 630
+
+banner = Image.open("sources/images/banner.png").convert("RGB")
+scale = max(W / banner.width, H / banner.height)
+banner = banner.resize((round(banner.width * scale), round(banner.height * scale)), Image.LANCZOS)
+left, top = (banner.width - W) // 2, (banner.height - H) // 2
+card = banner.crop((left, top, left + W, top + H))
+
+logo = Image.open("web/assets/images/logo.png").convert("RGBA")
+mark_height = 230
+logo = logo.resize((round(logo.width * mark_height / logo.height), mark_height), Image.LANCZOS)
+mark = Image.new("RGBA", logo.size, (255, 255, 255, 255))
+mark.putalpha(logo.split()[3])
+card.paste(mark, ((W - logo.width) // 2, (H - logo.height) // 2), mark)
+
+# q82 is where the banner's grain stops costing bytes without turning into blockiness; the card lands just under 100 KB.
+card.save("web/assets/images/social-card.jpg", "JPEG", quality=82, optimize=True, progressive=True)
+print(f"web/assets/images/social-card.jpg ({os.path.getsize('web/assets/images/social-card.jpg'):,} B)")
+PY
+
+# Lighthouse <=13.5 only probes the predecessor path (and its schema wants the specVersion root that ARD ignores), so the manifest is mirrored instead of living twice.
+cp web/.well-known/ard.json web/.well-known/ai-catalog.json
 
 python3 - <<'PY'
 from PIL import Image
