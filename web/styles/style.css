@@ -1,33 +1,20 @@
 /* Self-hosted typefaces ---------------------------------------------------- */
 
+/* Both faces are the variable originals subset to Latin and encoded as WOFF2;
+ * sources/build.sh regenerates them from the full files in sources/fonts. One
+ * variable file per family covers every weight the page asks for. */
 @font-face {
     font-family: "Roboto";
-    src: url("../assets/fonts/Roboto-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Roboto";
-    src: url("../assets/fonts/Roboto-Medium.ttf") format("truetype");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Roboto";
-    src: url("../assets/fonts/Roboto-SemiBold.ttf") format("truetype");
-    font-weight: 600;
+    src: url("../assets/fonts/Roboto-Variable.woff2") format("woff2");
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: "JetBrains Mono";
-    src: url("../assets/fonts/JetBrainsMono%5Bwght%5D.ttf") format("truetype");
-    font-weight: 100 800;
+    src: url("../assets/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+    font-weight: 400 800;
     font-style: normal;
     font-display: swap;
 }
@@ -35,8 +22,9 @@
 /* Theme ------------------------------------------------------------------- */
 
 :root {
-    /* The header bar's base colour: white, so nothing flashes while
-     * banner.png loads or if it fails. */
+    /* The header bar's base colour: white, so nothing flashes before the banner
+     * layer paints. If banner.webp never loads, the gradient layer behind it
+     * takes over. */
     --header-base: #ffffff;
 
     /* Text is either pure black on the white page or pure white in the bar. */
@@ -151,10 +139,14 @@ button:focus-visible {
     padding: 0 max(var(--content-gutter), calc((100% - var(--content-width)) / 2 + var(--content-gutter)));
     color: #ffffff;
     background-color: var(--header-base);
-    background-image: url("../assets/images/banner.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    /* A failed image layer paints nothing, so the gradient sits behind the
+     * banner purely as a fallback for browsers without WebP: the bar keeps
+     * its colour instead of dropping to the white base. */
+    background-image: url("../assets/images/banner.webp"),
+        linear-gradient(103deg, #f2e6ff 0%, #a98cff 55%, #6f5cf0 100%);
+    background-position: center, center;
+    background-size: cover, cover;
+    background-repeat: no-repeat, no-repeat;
 }
 
 /* The transparent monogram is the whole brand, so it carries the link back
