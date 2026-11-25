@@ -11,6 +11,7 @@ Jonas builds Flutter apps for iOS and Android, static web tools and Java service
 - [Rowing Workouts](https://rowing.vlkn.io): Flutter app that walks through bundled rowing interval workouts while keeping the stroke rate.
 - [Photo Collector](https://photo-collector.vlkn.io): Fully static, self-hosted app that lets event guests upload photos and videos straight to S3-compatible storage.
 - [Cartographer](https://github.com/jonaspoxleitner/cartographer): Java 21 tool that merges GPX hiking routes into a route graph, rendering SVG maps and serving an interactive web map with pathfinding.
+- [Flowers](https://flowers.vlkn.io): Rotating bouquet modeled from glyphs and rasterized into a single `<pre>`, with an on-page palette editor - no WebGL, canvas or images.
 
 ## Elsewhere
 
